@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.MiddleteacherMapper" >
+  <resultMap id="BaseResultMap" type="com.ypf.cn.domain.Middleteacher" >
+    <id column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="tuid" property="tuid" jdbcType="INTEGER" />
+    <result column="tname" property="tname" jdbcType="VARCHAR" />
+    <result column="ttel" property="ttel" jdbcType="VARCHAR" />
+    <result column="tstatus" property="tstatus" jdbcType="VARCHAR" />
+    <result column="tcreatedate" property="tcreatedate" jdbcType="DATE" />
+    <result column="temail" property="temail" jdbcType="VARCHAR" />
+    <result column="tdescription" property="tdescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tid, cid, tuid, tname, ttel, tstatus, tcreatedate, temail, tdescription
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from middleteacher
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from middleteacher
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  
+   <delete id="deleteByCid" parameterType="java.lang.Integer" >
+    delete from middleteacher
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ypf.cn.domain.Middleteacher" >
+    insert into middleteacher (tid, cid, tuid, 
+      tname, ttel, tstatus, 
+      tcreatedate, temail, tdescription
+      )
+    values (#{tid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{tuid,jdbcType=INTEGER}, 
+      #{tname,jdbcType=VARCHAR}, #{ttel,jdbcType=VARCHAR}, #{tstatus,jdbcType=VARCHAR}, 
+      #{tcreatedate,jdbcType=DATE}, #{temail,jdbcType=VARCHAR}, #{tdescription,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ypf.cn.domain.Middleteacher" >
+    insert into middleteacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="tuid != null" >
+        tuid,
+      </if>
+      <if test="tname != null" >
+        tname,
+      </if>
+      <if test="ttel != null" >
+        ttel,
+      </if>
+      <if test="tstatus != null" >
+        tstatus,
+      </if>
+      <if test="tcreatedate != null" >
+        tcreatedate,
+      </if>
+      <if test="temail != null" >
+        temail,
+      </if>
+      <if test="tdescription != null" >
+        tdescription,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tid != null" >
+        #{tid,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="tuid != null" >
+        #{tuid,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="ttel != null" >
+        #{ttel,jdbcType=VARCHAR},
+      </if>
+      <if test="tstatus != null" >
+        #{tstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tcreatedate != null" >
+        #{tcreatedate,jdbcType=DATE},
+      </if>
+      <if test="temail != null" >
+        #{temail,jdbcType=VARCHAR},
+      </if>
+      <if test="tdescription != null" >
+        #{tdescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ypf.cn.domain.Middleteacher" >
+    update middleteacher
+    <set >
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="tuid != null" >
+        tuid = #{tuid,jdbcType=INTEGER},
+      </if>
+      <if test="tname != null" >
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="ttel != null" >
+        ttel = #{ttel,jdbcType=VARCHAR},
+      </if>
+      <if test="tstatus != null" >
+        tstatus = #{tstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tcreatedate != null" >
+        tcreatedate = #{tcreatedate,jdbcType=DATE},
+      </if>
+      <if test="temail != null" >
+        temail = #{temail,jdbcType=VARCHAR},
+      </if>
+      <if test="tdescription != null" >
+        tdescription = #{tdescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ypf.cn.domain.Middleteacher" >
+    update middleteacher
+    set cid = #{cid,jdbcType=INTEGER},
+      tuid = #{tuid,jdbcType=INTEGER},
+      tname = #{tname,jdbcType=VARCHAR},
+      ttel = #{ttel,jdbcType=VARCHAR},
+      tstatus = #{tstatus,jdbcType=VARCHAR},
+      tcreatedate = #{tcreatedate,jdbcType=DATE},
+      temail = #{temail,jdbcType=VARCHAR},
+      tdescription = #{tdescription,jdbcType=VARCHAR}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByMap"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select <include refid="Base_Column_List"/> from middleteacher where 1=1 
+      <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="name!=null">
+			and name  LIKE CONCAT('%',#{name},'%') 
+	 	</if>
+	 	 <if test="cid != null" >
+     and   cid = #{cid,jdbcType=INTEGER}
+      </if>
+        <if test="username!=null">
+			and username like #{username,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="startPos!=null">
+			limit #{startPos},#{limit}
+	 	</if>
+	 	
+	 	<!-- startPos=(page-1)*limit从第几条数据开始查询  pagesize每页显示几条 -->
+    </select>
+     
+    <select id="findcountbycondition"  resultType="Integer" parameterType="java.util.HashMap">
+        select count(*) from middleteacher where 1=1 
+       <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+	 	 <if test="cid != null" >
+    	  and 	 cid = #{cid,jdbcType=INTEGER}
+      	</if>
+	 	<if test="name!=null">
+			and name  LIKE CONCAT('%',#{name},'%') 
+	 	</if>
+        <if test="username!=null">
+			and username like #{username,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+    </select>
+</mapper>

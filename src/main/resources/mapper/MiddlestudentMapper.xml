@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.MiddlestudentMapper" >
+  <resultMap id="BaseResultMap" type="com.ypf.cn.domain.Middlestudent" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="screatedate" property="screatedate" jdbcType="DATE" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="sstatus" property="sstatus" jdbcType="VARCHAR" />
+    <result column="sdescription" property="sdescription" jdbcType="VARCHAR" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="stel" property="stel" jdbcType="VARCHAR" />
+    <result column="semail" property="semail" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sid, screatedate, uid, sstatus, sdescription, sname, stel, semail, cid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from middlestudent
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from middlestudent
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ypf.cn.domain.Middlestudent" >
+    insert into middlestudent (sid, screatedate, uid, 
+      sstatus, sdescription, sname, 
+      stel, semail, cid)
+    values (#{sid,jdbcType=INTEGER}, #{screatedate,jdbcType=DATE}, #{uid,jdbcType=INTEGER}, 
+      #{sstatus,jdbcType=VARCHAR}, #{sdescription,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
+      #{stel,jdbcType=VARCHAR}, #{semail,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ypf.cn.domain.Middlestudent" >
+    insert into middlestudent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="screatedate != null" >
+        screatedate,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="sstatus != null" >
+        sstatus,
+      </if>
+      <if test="sdescription != null" >
+        sdescription,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="stel != null" >
+        stel,
+      </if>
+      <if test="semail != null" >
+        semail,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="screatedate != null" >
+        #{screatedate,jdbcType=DATE},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="sstatus != null" >
+        #{sstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sdescription != null" >
+        #{sdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="stel != null" >
+        #{stel,jdbcType=VARCHAR},
+      </if>
+      <if test="semail != null" >
+        #{semail,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ypf.cn.domain.Middlestudent" >
+    update middlestudent
+    <set >
+      <if test="screatedate != null" >
+        screatedate = #{screatedate,jdbcType=DATE},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="sstatus != null" >
+        sstatus = #{sstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sdescription != null" >
+        sdescription = #{sdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="stel != null" >
+        stel = #{stel,jdbcType=VARCHAR},
+      </if>
+      <if test="semail != null" >
+        semail = #{semail,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ypf.cn.domain.Middlestudent" >
+    update middlestudent
+    set screatedate = #{screatedate,jdbcType=DATE},
+      uid = #{uid,jdbcType=INTEGER},
+      sstatus = #{sstatus,jdbcType=VARCHAR},
+      sdescription = #{sdescription,jdbcType=VARCHAR},
+      sname = #{sname,jdbcType=VARCHAR},
+      stel = #{stel,jdbcType=VARCHAR},
+      semail = #{semail,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByMap"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select <include refid="Base_Column_List"/> from middlestudent where 1=1 
+       <if test="sid!=null">
+			and sid = #{sid,jdbcType=INTEGER}
+	 	</if>
+	 	 <if test="uid!=null">
+			and uid = #{uid,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="cid!=null">
+			and cid = #{cid,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="title!=null">
+			and title  LIKE CONCAT('%',#{title},'%') 
+	 	</if>
+        <if test="username!=null">
+			and username like #{username,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="startPos!=null">
+			limit #{startPos},#{limit}
+	 	</if>
+	 	
+	 	<!-- startPos=(page-1)*limit从第几条数据开始查询  pagesize每页显示几条 -->
+    </select>
+     
+    <select id="findcountbycondition"  resultType="Integer" parameterType="java.util.HashMap">
+        select count(*) from middlestudent where 1=1 
+        <if test="cid!=null">
+			and cid = #{cid,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="title!=null">
+			and title  LIKE CONCAT('%',#{title},'%') 
+	 	</if>
+        <if test="sid!=null">
+			and sid = #{sid,jdbcType=INTEGER}
+	 	</if>
+	 	 <if test="uid!=null">
+			and uid = #{uid,jdbcType=INTEGER}
+	 	</if>
+    </select>
+</mapper>

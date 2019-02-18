@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.ArtsMapper" >
+  <resultMap id="BaseResultMap" type="com.ypf.cn.domain.Arts" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="descirption" property="descirption" jdbcType="VARCHAR" />
+    <result column="membernum" property="membernum" jdbcType="INTEGER" />
+    <result column="useful" property="useful" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, name, address, createdate, status, descirption, membernum, useful, content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from arts
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from arts
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ypf.cn.domain.Arts" >
+    insert into arts (id, title, name, 
+      address, createdate, status, 
+      descirption, membernum, useful, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{status,jdbcType=VARCHAR}, 
+      #{descirption,jdbcType=VARCHAR}, #{membernum,jdbcType=INTEGER}, #{useful,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ypf.cn.domain.Arts" >
+    insert into arts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="descirption != null" >
+        descirption,
+      </if>
+      <if test="membernum != null" >
+        membernum,
+      </if>
+      <if test="useful != null" >
+        useful,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="descirption != null" >
+        #{descirption,jdbcType=VARCHAR},
+      </if>
+      <if test="membernum != null" >
+        #{membernum,jdbcType=INTEGER},
+      </if>
+      <if test="useful != null" >
+        #{useful,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ypf.cn.domain.Arts" >
+    update arts
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="descirption != null" >
+        descirption = #{descirption,jdbcType=VARCHAR},
+      </if>
+      <if test="membernum != null" >
+        membernum = #{membernum,jdbcType=INTEGER},
+      </if>
+      <if test="useful != null" >
+        useful = #{useful,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ypf.cn.domain.Arts" >
+    update arts
+    set title = #{title,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      status = #{status,jdbcType=VARCHAR},
+      descirption = #{descirption,jdbcType=VARCHAR},
+      membernum = #{membernum,jdbcType=INTEGER},
+      useful = #{useful,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <select id="selectByMap"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select <include refid="Base_Column_List"/> from arts where 1=1 
+         <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+        <if test="title!=null">
+			and title LIKE CONCAT('%',#{title},'%') 
+	 	</if>
+        <if test="username!=null">
+			and username like #{username,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="startPos!=null">
+		 order by id desc limit #{startPos},#{limit}
+	 	</if>
+	 	
+	 	<!-- startPos=(page-1)*limit从第几条数据开始查询  pagesize每页显示几条 -->
+    </select>
+     
+    <select id="findcountbycondition"  resultType="Integer" parameterType="java.util.HashMap">
+        select count(*) from arts where 1=1 
+        <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+       <if test="title!=null">
+			and title LIKE CONCAT('%',#{title},'%') 
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+    </select>
+</mapper>

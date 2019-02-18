@@ -1,0 +1,12 @@
+{"msg":"",
+"code":0
+,"data":[
+{
+"status":"1",
+"email":"xlzuihao@163.com","tel":"13376552222",
+"tname":"bj",
+"subjectid":"2,3",
+"tid":1,
+"classid":"1,2"},
+{"status":"1","email":"xizuibang@163.com","teid":"t2","tel":"12324445325","tname":"Àî¾ü","subjectid":"1","tid":2,"classid":"2,3"},
+{"status":"1","email":"xlzuijiw@163.com","teid":"t3","tel":"12324455655","tname":"ÀîºÆ","subjectid":"4","tid":3,"classid":"2,3"}],"count":9}

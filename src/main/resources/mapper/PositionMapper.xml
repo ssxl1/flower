@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.PositionMapper" >
+  <resultMap id="BaseResultMap" type="com.ypf.cn.domain.Position" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ceatedate" property="ceatedate" jdbcType="DATE" />
+    <result column="place" property="place" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="dept" property="dept" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="descirption" property="descirption" jdbcType="VARCHAR" />
+    <result column="ask" property="ask" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ceatedate, place, year, dept, education, num, descirption, ask, type, name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ypf.cn.domain.Position" >
+    insert into position (id, ceatedate, place, 
+      year, dept, education, 
+      num, descirption, ask, 
+      type, name)
+    values (#{id,jdbcType=INTEGER}, #{ceatedate,jdbcType=DATE}, #{place,jdbcType=VARCHAR}, 
+      #{year,jdbcType=INTEGER}, #{dept,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{descirption,jdbcType=VARCHAR}, #{ask,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ypf.cn.domain.Position" >
+    insert into position
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ceatedate != null" >
+        ceatedate,
+      </if>
+      <if test="place != null" >
+        place,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="dept != null" >
+        dept,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="descirption != null" >
+        descirption,
+      </if>
+      <if test="ask != null" >
+        ask,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ceatedate != null" >
+        #{ceatedate,jdbcType=DATE},
+      </if>
+      <if test="place != null" >
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="dept != null" >
+        #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="descirption != null" >
+        #{descirption,jdbcType=VARCHAR},
+      </if>
+      <if test="ask != null" >
+        #{ask,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ypf.cn.domain.Position" >
+    update position
+    <set >
+      <if test="ceatedate != null" >
+        ceatedate = #{ceatedate,jdbcType=DATE},
+      </if>
+      <if test="place != null" >
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="dept != null" >
+        dept = #{dept,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="descirption != null" >
+        descirption = #{descirption,jdbcType=VARCHAR},
+      </if>
+      <if test="ask != null" >
+        ask = #{ask,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ypf.cn.domain.Position" >
+    update position
+    set ceatedate = #{ceatedate,jdbcType=DATE},
+      place = #{place,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      dept = #{dept,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      descirption = #{descirption,jdbcType=VARCHAR},
+      ask = #{ask,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByMap"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select <include refid="Base_Column_List"/> from position where 1=1 
+        <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="name!=null">
+			and name  LIKE CONCAT('%',#{name},'%') 
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="startPos!=null">
+			limit #{startPos},#{limit}
+	 	</if>
+	 	
+	 	<!-- startPos=(page-1)*limit从第几条数据开始查询  pagesize每页显示几条 -->
+    </select>
+     
+    <select id="findcountbycondition"  resultType="Integer" parameterType="java.util.HashMap">
+        select count(*) from position where 1=1 
+        <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="name!=null">
+			and name  LIKE CONCAT('%',#{name},'%') 
+	 	</if>
+	 	<if test="userSalary!=null">
+			and userSalary >=#{userSalary,jdbcType=NUMERIC}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+    </select>
+  
+</mapper>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.ChildmenusMapper" >
+ <resultMap id="BaseResultMap" type="com.ypf.cn.domain.Childmenus" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ctext" property="ctext" jdbcType="VARCHAR" />
+    <result column="cicon" property="cicon" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="menuid" property="menuid" jdbcType="INTEGER" />
+    <result column="cdescription" property="cdescription" jdbcType="VARCHAR" />
+    <result column="cstatus" property="cstatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ctext, cicon, href, menuid, cdescription, cstatus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from childmenus
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from childmenus
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+   <delete id="deleteByMenuid" parameterType="java.lang.Integer" >
+    delete from childmenus
+    where menuid = #{menuid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ypf.cn.domain.Childmenus" >
+    insert into childmenus (id, ctext, cicon, 
+      href, menuid, cdescription, 
+      cstatus)
+    values (#{id,jdbcType=INTEGER}, #{ctext,jdbcType=VARCHAR}, #{cicon,jdbcType=VARCHAR}, 
+      #{href,jdbcType=VARCHAR}, #{menuid,jdbcType=INTEGER}, #{cdescription,jdbcType=VARCHAR}, 
+      #{cstatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ypf.cn.domain.Childmenus" >
+    insert into childmenus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ctext != null" >
+        ctext,
+      </if>
+      <if test="cicon != null" >
+        cicon,
+      </if>
+      <if test="href != null" >
+        href,
+      </if>
+      <if test="menuid != null" >
+        menuid,
+      </if>
+      <if test="cdescription != null" >
+        cdescription,
+      </if>
+      <if test="cstatus != null" >
+        cstatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ctext != null" >
+        #{ctext,jdbcType=VARCHAR},
+      </if>
+      <if test="cicon != null" >
+        #{cicon,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="menuid != null" >
+        #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="cdescription != null" >
+        #{cdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="cstatus != null" >
+        #{cstatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ypf.cn.domain.Childmenus" >
+    update childmenus
+    <set >
+      <if test="ctext != null" >
+        ctext = #{ctext,jdbcType=VARCHAR},
+      </if>
+      <if test="cicon != null" >
+        cicon = #{cicon,jdbcType=VARCHAR},
+      </if>
+      <if test="href != null" >
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="menuid != null" >
+        menuid = #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="cdescription != null" >
+        cdescription = #{cdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="cstatus != null" >
+        cstatus = #{cstatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ypf.cn.domain.Childmenus" >
+    update childmenus
+    set ctext = #{ctext,jdbcType=VARCHAR},
+      cicon = #{cicon,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      menuid = #{menuid,jdbcType=INTEGER},
+      cdescription = #{cdescription,jdbcType=VARCHAR},
+      cstatus = #{cstatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectByMap"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select <include refid="Base_Column_List"/> from childmenus where 1=1 
+        <if test="userid!=null">
+			and userid = #{userid,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="menuid!=null">
+			and menuid = #{menuid,jdbcType=INTEGER}
+	 	</if>
+        <if test="ctext!=null">
+			and ctext = #{ctext,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="startPos!=null">
+			limit #{startPos},#{limit}
+	 	</if>
+	 	
+	 	<!-- startPos=(page-1)*limit从第几条数据开始查询  pagesize每页显示几条 -->
+    </select>
+     
+    <select id="findcountbycondition"  resultType="Integer" parameterType="java.util.HashMap">
+        select count(*) from childmenus where 1=1 
+        <if test="userid!=null">
+			and userid = #{userid,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="menuid!=null">
+			and menuid = #{menuid,jdbcType=INTEGER}
+	 	</if>
+	 	 <if test="ctext!=null">
+			and ctext = #{ctext,jdbcType=VARCHAR}
+	 	</if>
+        <if test="username!=null">
+			and username like #{username,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+    </select>
+</mapper>

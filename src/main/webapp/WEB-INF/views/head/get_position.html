@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>填写简历</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css"  th:href="@{/static/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="/static/css/icons.css">
+	<link rel="stylesheet" type="text/css"  th:href="@{/static/css/style.css}" href="/static/css/style.css"  />
+	<link rel="stylesheet" type="text/css" href="/static/css/responsive.css" th:href="@{/static/css/responsive.css}"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/color.css" th:href="@{/static/css/color.css}"/>
+
+	
+  </head>
+   <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+
+  <body>
+  	 <div class="theme-layout">
+  	 
+		<header>
+		<div th:include="views/head/heads :: copy"></div> 
+		
+		</header><!-- Header -->
+		
+		<div class="container">
+			<div class="content">
+      	     <div class="register">
+		  	  <form id="registerform" action="/addresume"> 
+				 <div class="register-top-grid">
+			<!-- 	    id, ryear, rdescirption, rexperience, remail, rtel, rage, rname, pid, videopath, 
+    raddress, pname, rstatus -->
+					<h3>Personal Information</h3>
+					 <div>
+					 <input type="hidden" id="pid"  name="pid" th:value="${pid}" > 
+						<span>Name<label>*</label></span>
+						<input type="text" id="rname"  name="rname" > 
+					 </div>
+					 <div>
+						<span>工作年龄<label>*</label></span>
+						<input type="text" id="ryear"  name="ryear"> 
+					 </div>
+					 <div>
+						<span>年龄<label>*</label></span>
+						<input type="text" id="rage"  name="rage"> 
+					 </div>
+					 <div>
+						 <span>工作经历 <label>*</label></span>
+						 <input type="text" id="rexperience"  name="rexperience"> 
+					 </div>
+					  <div>
+						 <span>工作描述<label>*</label></span>
+						 <input type="text" id="rdescirption"  name="rdescirption"> 
+					 </div>
+					 <div>
+						 <span>联系方式<label>*</label></span>
+						 <input type="text" id="rtel"  name="rtel"> 
+					 </div>
+					 <div>
+						 <span>email<label>*</label></span>
+						 <input type="text" id="remail"  name="remail"> 
+					 </div>
+					 <div>
+						 <span>住址<label>*</label></span>
+						 <input type="text" id="raddress"  name="raddress"> 
+					 </div>
+					 <div class="clearfix"> </div>
+					 </div>
+					 
+					 <div class="form-group">
+                                <label for="exampleInputFile">上传视频</label>
+                                <input type="file" name="file" id="file">
+                     </div>
+				</form>
+				<div class="clearfix"> </div>
+				<div class="register-but">
+						<button type="button" id="submitAdd" style="" >submit</button> 
+					  <!--  <input type="submit" value="submit"> -->
+					   <div class="clearfix"> </div>
+				</div>
+		   </div>
+           </div>
+    </div>
+		
+		</div> 
+		
+		<footer>
+			<div th:include="views/head/footer :: copyfooter"></div> 
+		</footer><!-- Footer -->
+
+		 <div  class="bottom-footer">
+			<div th:include="views/head/bottom-footer :: bottom"></div> 
+		</div><!-- Bottom Footer -->
+		
+		
+</div> 
+  </body>
+</html>
+<script>
+$(document).ready(function(){
+ /*    $("div").html("");
+    $("a").click(function(){
+//add your code here
+    }) id, ryear, rdescirption, rexperience, remail, rtel, rage, rname, pid, videopath, 
+    raddress, pname, rstatus*/
+    $("#submitAdd").click(function(){
+	  var targetUrl = $("#registerform").attr("action");    
+	  var data = $("#registerform").serialize();
+	  
+            var filepath=$("input[name='file']").val();
+            var extStart=filepath.lastIndexOf(".");
+            var ext=filepath.substring(extStart,filepath.length).toUpperCase();
+             
+            if(ext!=".MP4"&&ext!=".AVI"&&ext!=".MKV"&&ext!=".RMVB"&&ext!=".RM"){
+                 alert("视频限于mkv, mp4, avi, rm, rmvb格式");
+                 return false;
+            }
+	  var formData = new FormData($("#registerform")[0]);
+	   $.ajax({ 
+	    type:'post',  
+	    url:targetUrl, 
+	    data:formData,  
+	  	 async: false,
+	        cache: false,
+	        contentType: false,
+	        processData: false,
+	    success:function(data){
+	    	if(data.state==1){
+	    		 alert('提交 success');
+	    		 setTimeout(function(){ window.open("index.html","_self"); }, 2000); 
+	    	}else{
+	    		 alert('提交  error，Please check if the input is correct');
+	    	}
+	    },
+	    error:function(){ 
+	     alert("提交  error，Please check if the input is correct ")
+	    }
+	   })
+	    
+	})
+})
+	
+</script>

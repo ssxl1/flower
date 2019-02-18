@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.NewsMapper" >
+  <resultMap id="BaseResultMap" type="com.ypf.cn.domain.News" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="authors" property="authors" jdbcType="VARCHAR" />
+    <result column="descirption" property="descirption" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, authors, descirption, createdate, num, content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from news
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from news
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ypf.cn.domain.News" >
+    insert into news (id, title, authors, 
+      descirption, createdate, num, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{authors,jdbcType=VARCHAR}, 
+      #{descirption,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{num,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ypf.cn.domain.News" >
+    insert into news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="authors != null" >
+        authors,
+      </if>
+      <if test="descirption != null" >
+        descirption,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="authors != null" >
+        #{authors,jdbcType=VARCHAR},
+      </if>
+      <if test="descirption != null" >
+        #{descirption,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ypf.cn.domain.News" >
+    update news
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="authors != null" >
+        authors = #{authors,jdbcType=VARCHAR},
+      </if>
+      <if test="descirption != null" >
+        descirption = #{descirption,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ypf.cn.domain.News" >
+    update news
+    set title = #{title,jdbcType=VARCHAR},
+      authors = #{authors,jdbcType=VARCHAR},
+      descirption = #{descirption,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      num = #{num,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByMap"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select <include refid="Base_Column_List"/> from news where 1=1 
+       <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="title!=null">
+			and title  LIKE CONCAT('%',#{title},'%') 
+	 	</if>
+        <if test="username!=null">
+			and username like #{username,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="startPos!=null">
+			limit #{startPos},#{limit}
+	 	</if>
+	 	
+	 	<!-- startPos=(page-1)*limit从第几条数据开始查询  pagesize每页显示几条 -->
+    </select>
+     
+    <select id="findcountbycondition"  resultType="Integer" parameterType="java.util.HashMap">
+        select count(*) from news where 1=1 
+        <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+	 	<if test="title!=null">
+			and title  LIKE CONCAT('%',#{title},'%') 
+	 	</if>
+        <if test="username!=null">
+			and username like #{username,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+    </select>
+</mapper>

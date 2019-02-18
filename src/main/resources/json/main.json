@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "text": "用户管理",
+      "icon": "&#xe620;",
+      "subset": [
+        {
+          "text": "您暂时无权限",
+          "icon": "&#xe621;",
+          "href": "login.jsp"
+        }
+      ]
+    },{
+      "text": "app管理",
+      "icon": "&#xe628;",
+      "href": "",
+      "subset": [
+        {
+          "text": "app列表",
+          "icon": "&#xe621;",
+          "href": "demo/applist.jsp"
+        }
+      ]
+    }
+  ]
+}

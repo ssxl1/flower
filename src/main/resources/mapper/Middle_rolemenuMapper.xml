@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.Middle_rolemenuMapper" >
+  <resultMap id="BaseResultMap" type="com.ypf.cn.domain.Middle_rolemenu" >
+    <id column="mid" property="mid" jdbcType="INTEGER" />
+    <result column="roleid" property="roleid" jdbcType="INTEGER" />
+    <result column="menuid" property="menuid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mid, roleid, menuid, status, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from middle_rolemenu
+    where mid = #{mid,jdbcType=INTEGER}
+  </select>
+   <delete id="deleteByRoleid" parameterType="java.lang.Integer" >
+    delete from middle_rolemenu
+    where roleid = #{roleid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from middle_rolemenu
+    where mid = #{mid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ypf.cn.domain.Middle_rolemenu" >
+    insert into middle_rolemenu (mid, roleid, menuid, 
+      status, description)
+    values (#{mid,jdbcType=INTEGER}, #{roleid,jdbcType=INTEGER}, #{menuid,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ypf.cn.domain.Middle_rolemenu" >
+    insert into middle_rolemenu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="roleid != null" >
+        roleid,
+      </if>
+      <if test="menuid != null" >
+        menuid,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mid != null" >
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="menuid != null" >
+        #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ypf.cn.domain.Middle_rolemenu" >
+    update middle_rolemenu
+    <set >
+      <if test="roleid != null" >
+        roleid = #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="menuid != null" >
+        menuid = #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ypf.cn.domain.Middle_rolemenu" >
+    update middle_rolemenu
+    set roleid = #{roleid,jdbcType=INTEGER},
+      menuid = #{menuid,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectByMap"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select <include refid="Base_Column_List"/> from middle_rolemenu where 1=1 
+         <if test="menuid!=null">
+			and  menuid = #{menuid,jdbcType=INTEGER}
+	 	</if>
+	 	 <if test="roleid!=null">
+			and  roleid = #{roleid,jdbcType=INTEGER}
+	 	</if>
+        <if test="text!=null">
+			and text LIKE CONCAT('%',#{text},'%') 
+	 	</if>
+	 	<if test="startPos!=null">
+		 order by id desc limit #{startPos},#{limit}
+	 	</if>
+	 	
+	 	<!-- startPos=(page-1)*limit从第几条数据开始查询  pagesize每页显示几条 -->
+    </select>
+     
+    <select id="findcountbycondition"  resultType="Integer" parameterType="java.util.HashMap">
+        select count(*) from middle_rolemenu where 1=1 
+        <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+        <if test="text!=null">
+			and text LIKE CONCAT('%',#{text},'%') 
+	 	</if>
+	 	 <if test="menuid!=null">
+			and  menuid = #{menuid,jdbcType=INTEGER}
+	 	</if>
+	 	 <if test="roleid!=null">
+			and  roleid = #{roleid,jdbcType=INTEGER}
+	 	</if>
+    </select>
+</mapper>

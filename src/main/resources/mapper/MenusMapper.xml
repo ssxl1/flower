@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.MenusMapper" >
+  <resultMap id="BaseResultMap" type="com.ypf.cn.domain.Menus" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    
+  </resultMap>
+  
+    <resultMap id="JoinResultMap" type="com.ypf.cn.domain.Menus" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+      <collection property="childmenus" ofType="com.ypf.cn.domain.Childmenus">
+			<!-- 定义这个集合中元素的封装规则 -->
+			<result column="ctext" property="ctext"/>
+			<result column="cicon" property="cicon"/>
+			<result column="href" property="href"/>
+			<result column="cstatus" property="cstatus"/>
+		</collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, text, icon, status, description
+  </sql>
+  
+   <select id="selectByJoin" resultMap="JoinResultMap" parameterType="java.util.HashMap" >
+    select m.id id,m.text text ,m.icon icon ,m.status status, m.description description, c.ctext ctext ,c.cicon cicon, c.href href ,c.cstatus cstatus
+      from menus m,childmenus c, middle_rolemenu mr, role r
+    where  c.menuid=m.id    and  r.id=mr.roleid and  mr.menuid=m.id and m.status='y' and c.cstatus='y'
+    
+    	<if test="description!=null">
+			and m.description = #{description,jdbcType=VARCHAR}
+	 	</if>
+	 	 <if test="rid!=null">
+			and r.id = #{rid,jdbcType=INTEGER}
+	 	</if>
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from menus
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from menus
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ypf.cn.domain.Menus" >
+    insert into menus (id, text, icon, 
+      status, description)
+    values (#{id,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ypf.cn.domain.Menus" >
+    insert into menus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ypf.cn.domain.Menus" >
+    update menus
+    <set >
+      <if test="text != null" >
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ypf.cn.domain.Menus" >
+    update menus
+    set text = #{text,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectByMap"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        select <include refid="Base_Column_List"/> from menus where 1=1 
+         <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+        <if test="text!=null">
+			and text LIKE CONCAT('%',#{text},'%') 
+	 	</if>
+        <if test="username!=null">
+			and username like #{username,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="startPos!=null">
+		 order by id desc limit #{startPos},#{limit}
+	 	</if>
+	 	
+	 	<!-- startPos=(page-1)*limit从第几条数据开始查询  pagesize每页显示几条 -->
+    </select>
+     
+    <select id="findcountbycondition"  resultType="Integer" parameterType="java.util.HashMap">
+        select count(*) from menus where 1=1 
+        <if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+	 	</if>
+        <if test="text!=null">
+			and text LIKE CONCAT('%',#{text},'%') 
+	 	</if>
+	 	<if test="type!=null">
+			and type = #{type,jdbcType=VARCHAR}
+	 	</if>
+    </select>
+</mapper>

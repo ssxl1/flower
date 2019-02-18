@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.CountExcelMapper" >
+  <resultMap id="BaseResultMap" type="com.ypf.cn.domain.CountExcel" >
+    <result column="allmoney" property="allmoney" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="datanum" property="datanum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, address, createdate, status, descirption, membernum
+  </sql>
+  <select id="selectByMonth" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+   SELECT COUNT(*) as datanum,MONTH(createdate) as month ,sum(allmoney) as allmoney FROM classroom WHERE YEAR(createdate) = '2018' GROUP BY MONTH(createdate)
+  </select>
+  
+   <select id="selectByTmonth" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+   SELECT COUNT(*) as datanum,QUARTER(createdate) as month ,sum(allmoney) as allmoney  FROM  classroom WHERE YEAR(createdate) = '2018' GROUP BY QUARTER(createdate) 
+  </select>
+  
+   <select id="selectByYear" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+   select sum(allmoney) as allmoney, count(*) as datanum from classroom group by date_format('2018-01-01', '%Y')
+  </select>
+  
+</mapper>

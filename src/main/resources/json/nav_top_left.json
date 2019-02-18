@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "text": "---",
+      "icon": "&#xe621;",
+      "href": "login.jsp"
+    },{
+      "text": "基础",
+      "icon": "&#xe620;",
+      "subset": [
+      ]
+    }
+  ]
+}
