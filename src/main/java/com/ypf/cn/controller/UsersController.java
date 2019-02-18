@@ -83,6 +83,7 @@ public class UsersController {
 			code = "500";
 			msg = "查询error";
 		}
+		System.out.println("test");
 		RestResult<Object> restResult = new RestResult<>(code, msg, user);
 		return restResult;
 	}
