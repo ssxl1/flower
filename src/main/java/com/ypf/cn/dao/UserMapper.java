@@ -25,7 +25,7 @@ public interface UserMapper {
 	int updateByPrimaryKey(User record);
 
 	// 多条件查询
-	List<Users> selectByMap(Map map);
+	List<User> selectByMap(Map map);
 
 	// 获得总记录数
 	int findCountByCondition(Map map);

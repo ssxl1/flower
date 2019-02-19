@@ -1,6 +1,7 @@
 package com.ypf.cn.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.ypf.cn.dao.UserMapper;
 import com.ypf.cn.domain.User;
 import com.ypf.cn.domain.Users;
+import com.ypf.cn.util.PageUtil;
+import com.ypf.cn.util.RestResult;
 
 @Service
 public class UserService implements UserMapper {
@@ -49,7 +52,7 @@ public class UserService implements UserMapper {
 	}
 
 	@Override
-	public List<Users> selectByMap(Map map) {
+	public List<User> selectByMap(Map map) {
 		return userMapper.selectByMap(map);
 	}
 
@@ -57,31 +60,73 @@ public class UserService implements UserMapper {
 	public int findCountByCondition(Map map) {
 		return userMapper.findCountByCondition(map);
 	}
-	public Map<String,Object> selectAllUserk(int begin,int length,String jsonString){
 
-		if(!"".equals(jsonString)&&jsonString!=null){
+	public RestResult selectAllUser(int limit, int page, String jsonString) {
+		Map map = new HashMap<>();
+		Map mapjson = new HashMap<>();
+		if (!"".equals(jsonString) && jsonString != null) {
 			JSONObject json = JSONObject.parseObject(jsonString);
-			Map cMap = (Map)json;
+			Map cMap = (Map) json;
 			if (cMap != null && !cMap.isEmpty()) {
 				Iterator it = cMap.keySet().iterator();
-				while(it.hasNext()){
-					String name = (String)it.next();
-					if(name.equals("type")){//类型查询
-					}else if(name.equals("author")){
+				while (it.hasNext()) {
+					String name = (String) it.next();
+					if (name.equals("name")) {// 名称查询
 						try {
-							/*criteria.andBookauthorLike("%"+ java.net.URLDecoder.decode((String)cMap.get(name),"UTF-8") +"%");*/
+							map.put("name", java.net.URLDecoder.decode((String) cMap.get(name), "UTF-8"));
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+
+					} else if (name.equals("author")) {
+						try {
+							/*
+							 * criteria.andBookauthorLike("%"+
+							 * java.net.URLDecoder.decode((String)cMap.get(name),"UTF-8") +"%");
+							 */
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-					}else if(name.equals("shelveTime")){
-					}else if(name.equals("borrow")){
+					} else if (name.equals("shelveTime")) {
+					} else if (name.equals("borrow")) {
 					}
 				}
 			}
 		}
+		int count = 0;
+		int startPos = 0;
+		if (limit < 0) {
+			limit = 2;
+		}
+		map.put("limit", limit);
+		PageUtil pageUtil = new PageUtil();
+		count = userMapper.findCountByCondition(map);
+		if (count > 0) {
+			pageUtil.setPageSize(limit);
+			pageUtil.setTotalPage((int) count);
+			mapjson.put("count", count);
+		}
+		if (page > 0) {
+			startPos = (page - 1) * limit;
+			map.put("startPos", startPos);
+		} else {
+			page = 1;
+			map.put("startPos", startPos);
+		}
+		List<User> list = userMapper.selectByMap(map);
+		mapjson.put("data", list);
+		String code = "";
+		String msg = "";
+		if (list.size() > 0) {
+			code = "200";
+			msg = "查询成功";
+		} else {
+			code = "500";
+			msg = "查询error或无符合条件的数据";
+		}
+		RestResult result = new RestResult<>(code, msg, mapjson);
 
+		return result;
 
-		return null;
-		
 	}
 }
