@@ -1,114 +1,118 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-<modelVersion>4.0.0</modelVersion>
-<groupId>com.example</groupId>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>fower</name>
 	<description>Demo project for Spring Boot</description>
-<url>http://maven.apache.org</url>
-<parent>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-parent</artifactId>
-<version>1.5.9.RELEASE</version>
-<relativePath /> <!-- lookup parent from repository -->
-</parent>
-<properties>
-<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-<java.version>1.8</java.version>
-</properties>
-<dependencies>
-<!-- 对JDBC数据库的支持 -->
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-jdbc</artifactId>
-</dependency>
-<!-- mysql jdbc驱动 -->
-<dependency>
-<groupId>mysql</groupId>
-<artifactId>mysql-connector-java</artifactId>
-<scope>runtime</scope>
-</dependency>
-<!-- 面向切面编程的支持，包括spring-aop和AspectJ -->
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-aop</artifactId>
-</dependency>
-<!-- SpringBoot Test单元测试 -->
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-test</artifactId>
-<scope>test</scope>
-</dependency>
-<!-- spring boot整合mybatis -->
-<dependency>
-<groupId>org.mybatis.spring.boot</groupId>
-<artifactId>mybatis-spring-boot-starter</artifactId>
-<version>1.1.1</version>
-</dependency>
-<!-- springboot默认日志 Logback -->
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-logging</artifactId>
-</dependency>
-<!-- 对全栈web开发的支持，包括Tomcat和spring-webmvc
-此包可以用于返回JSP视图
--->
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-web</artifactId>
-</dependency>
-<!-- thymeleaf模板引擎，访问静态资源 -->
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-thymeleaf</artifactId>
-</dependency>
-<!-- 引入该包为了让application.properites中的 spring.thymeleaf.mode=LEGACYHTML5 生效，
-是为了解决 thymeleaf模板引擎过于严格的HTML校验-->
-<dependency>
-<groupId>net.sourceforge.nekohtml</groupId>
-<artifactId>nekohtml</artifactId>
-</dependency>
-<!-- tomcat 支持jsp-->
-<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+	<url>http://maven.apache.org</url>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.9.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+	<dependencies>
+		<!-- 对JDBC数据库的支持 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<!-- mysql jdbc驱动 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- 面向切面编程的支持，包括spring-aop和AspectJ -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<!-- SpringBoot Test单元测试 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- spring boot整合mybatis -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!-- springboot默认日志 Logback -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+		</dependency>
+		<!-- 对全栈web开发的支持，包括Tomcat和spring-webmvc 此包可以用于返回JSP视图 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- thymeleaf模板引擎，访问静态资源 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!-- 引入该包为了让application.properites中的 spring.thymeleaf.mode=LEGACYHTML5 
+			生效， 是为了解决 thymeleaf模板引擎过于严格的HTML校验 -->
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+		</dependency>
+		<!-- tomcat 支持jsp -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 
 
-<dependency>
-    <groupId>com.fasterxml.jackson.module</groupId>
-    <artifactId>jackson-module-parameter-names</artifactId>
-</dependency>
-<dependency>
-    <groupId>com.fasterxml.jackson.datatype</groupId>
-    <artifactId>jackson-datatype-jdk8</artifactId>
-</dependency>
-<dependency>
-<groupId>com.fasterxml.jackson.datatype</groupId>
-<artifactId>jackson-datatype-jsr310</artifactId>
-</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.module</groupId>
+			<artifactId>jackson-module-parameter-names</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jdk8</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
 
-<dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>poi</artifactId>
-    <version>RELEASE</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.poi</groupId>
-    <artifactId>poi-ooxml</artifactId>
-    <version>RELEASE</version>
-</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>RELEASE</version>
+		</dependency>
 
-
-</dependencies>
-<build>
-<plugins>
-<!-- SpringBoot的maven插件 -->
-<plugin>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-maven-plugin</artifactId>
-</plugin>
-</plugins>
-</build>
+       <!--添加fastjson依赖-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.7</version>
+        </dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- SpringBoot的maven插件 -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

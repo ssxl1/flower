@@ -20,7 +20,8 @@
 		<result column="deleted" jdbcType="BIT" property="deleted" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, user_sn, user_name, password, salt, first_name, last_name, email,
+		id, user_sn, user_name, password, salt, first_name,
+		last_name, email,
 		enabled, last_password_reset_date,
 		deleted
 	</sql>
@@ -37,14 +38,18 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.ypf.cn.domain.User">
-		insert into user (id, user_sn, user_name,
+		insert into user (id, user_sn,
+		user_name,
 		password, salt, first_name,
 		last_name, email, enabled,
 		last_password_reset_date, deleted)
-		values (#{id,jdbcType=INTEGER}, #{userSn,jdbcType=VARCHAR},
+		values (#{id,jdbcType=INTEGER},
+		#{userSn,jdbcType=VARCHAR},
 		#{userName,jdbcType=VARCHAR},
-		#{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{firstName,jdbcType=VARCHAR},
-		#{lastName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR},
+		#{firstName,jdbcType=VARCHAR},
+		#{lastName,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
 		#{enabled,jdbcType=BIT},
 		#{lastPasswordResetDate,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
 	</insert>
@@ -151,7 +156,8 @@
 				enabled = #{enabled,jdbcType=BIT},
 			</if>
 			<if test="lastPasswordResetDate != null">
-				last_password_reset_date = #{lastPasswordResetDate,jdbcType=TIMESTAMP},
+				last_password_reset_date =
+				#{lastPasswordResetDate,jdbcType=TIMESTAMP},
 			</if>
 			<if test="deleted != null">
 				deleted = #{deleted,jdbcType=BIT},
@@ -164,60 +170,62 @@
 		update user
 		set user_sn = #{userSn,jdbcType=VARCHAR},
 		user_name = #{userName,jdbcType=VARCHAR},
-		password = #{password,jdbcType=VARCHAR},
+		password =
+		#{password,jdbcType=VARCHAR},
 		salt = #{salt,jdbcType=VARCHAR},
 		first_name = #{firstName,jdbcType=VARCHAR},
-		last_name = #{lastName,jdbcType=VARCHAR},
+		last_name =
+		#{lastName,jdbcType=VARCHAR},
 		email = #{email,jdbcType=VARCHAR},
 		enabled = #{enabled,jdbcType=BIT},
-		last_password_reset_date = #{lastPasswordResetDate,jdbcType=TIMESTAMP},
-		deleted = #{deleted,jdbcType=BIT}
+		last_password_reset_date =
+		#{lastPasswordResetDate,jdbcType=TIMESTAMP},
+		deleted =
+		#{deleted,jdbcType=BIT}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	 <select id="selectByMap"  resultMap="BaseResultMap" parameterType="java.util.HashMap">
-        select <include refid="Base_Column_List"/> from user where 1=1 
-        <if test="id!=null">
+	<select id="selectByMap" resultMap="BaseResultMap"
+		parameterType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from user where 1=1
+		<if test="id!=null">
 			and id = #{id,jdbcType=INTEGER}
-	 	</if>
-	 	
-	 	<if test="roleid!=null">
-			and roleid = #{roleid,jdbcType=INTEGER}
-	 	</if>
-	 	<if test="name!=null">
-			and name  LIKE CONCAT('%',#{name},'%') 
-	 	</if>
-	 	<if test="is_admin!=null">
+		</if>
+
+		<if test="userName != null">
+			#{userName,jdbcType=VARCHAR},
+		</if>
+		<if test="name!=null">
+			and name LIKE CONCAT('%',#{name},'%')
+		</if>
+		<if test="is_admin!=null">
 			and is_admin =#{is_admin,jdbcType=VARCHAR}
-	 	</if>
-	 	<if test="deptname!=null">
-			and deptname = #{deptname,jdbcType=VARCHAR}
-	 	</if>
-	 	<if test="startPos!=null">
+		</if>
+		<if test="startPos!=null">
 			limit #{startPos},#{limit}
-	 	</if>
-	 	
-	 	<!-- startPos=(page-1)*limit从第几条数据开始查询  pagesize每页显示几条 -->
-    </select>
-     
-    <select id="findcountbycondition"  resultType="Integer" parameterType="java.util.HashMap">
-        select count(*) from user where 1=1 
-        <if test="id!=null">
+		</if>
+
+		<!-- startPos=(page-1)*limit从第几条数据开始查询 pagesize每页显示几条 -->
+	</select>
+
+	<select id="findcountbycondition" resultType="Integer"
+		parameterType="java.util.HashMap">
+		select count(*) from user where 1=1
+		<if test="id!=null">
 			and id = #{id,jdbcType=INTEGER}
-	 	</if>
-	 	<if test="roleid!=null">
-			and roleid = #{roleid,jdbcType=INTEGER}
-	 	</if>
-	 	<if test="name!=null">
-			and name  LIKE CONCAT('%',#{name},'%') 
-	 	</if>
-	 	<if test="is_admin!=null">
+		</if>
+		<if test="userName != null">
+			#{userName,jdbcType=VARCHAR},
+		</if>
+		<if test="name!=null">
+			and name LIKE CONCAT('%',#{name},'%')
+		</if>
+		<if test="is_admin!=null">
 			and is_admin =#{is_admin,jdbcType=VARCHAR}
-	 	</if>
-	 	<if test="userSalary!=null">
+		</if>
+		<if test="userSalary!=null">
 			and userSalary >=#{userSalary,jdbcType=NUMERIC}
-	 	</if>
-	 	<if test="deptname!=null">
-			and deptname = #{deptname,jdbcType=VARCHAR}
-	 	</if>
-    </select>
+		</if>
+	</select>
 </mapper>

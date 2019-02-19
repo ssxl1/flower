@@ -22669,3 +22669,10 @@ Caused by: java.lang.IllegalArgumentException: Result Maps collection already co
 2019-02-18 16:23:29.003  INFO 7000 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 2019-02-18 16:23:30.046  INFO 7000 --- [main] com.ypf.cn.FowerApplication              : Started FowerApplication in 2.041 seconds (JVM running for 2.443)
 2019-02-18 16:23:37.373  INFO 7000 --- [http-nio-9996-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-02-19 08:53:31.684  INFO 6716 --- [main] com.ypf.cn.FowerApplication              : Starting FowerApplication on DESKTOP-D7GQM28 with PID 6716 (E:\project\fower\target\classes started by yz in E:\project\fower)
+2019-02-19 08:53:31.686  INFO 6716 --- [main] com.ypf.cn.FowerApplication              : No active profile set, falling back to default profiles: default
+2019-02-19 08:53:32.572  INFO 6716 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-02-19 08:53:32.573  INFO 6716 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.23
+2019-02-19 08:53:32.626  INFO 6716 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-02-19 08:53:33.717  INFO 6716 --- [main] com.ypf.cn.FowerApplication              : Started FowerApplication in 2.17 seconds (JVM running for 2.564)
+2019-02-19 09:44:49.348  INFO 6716 --- [http-nio-9996-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'

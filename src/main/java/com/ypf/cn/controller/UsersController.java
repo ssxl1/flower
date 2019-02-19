@@ -15,7 +15,7 @@ import com.ypf.cn.util.RestResult;
 
 @RestController
 public class UsersController {
-	// 依赖注入 RestResult
+	// 依赖注入 
 	@Autowired
 	UserService userService;
 
@@ -57,11 +57,13 @@ public class UsersController {
 	public RestResult updateUser(@PathVariable int id, @RequestBody User user) {
 		user.setId(id);
 		int result = userService.deleteByPrimaryKey(id);
+		
+		
 		String code = "";
 		String msg = "";
 		if (result > 0) {
 			code = "200";
-			msg = "成功";
+			msg = "更新成功";
 		} else {
 			code = "500";
 			msg = "更新error";
@@ -83,7 +85,6 @@ public class UsersController {
 			code = "500";
 			msg = "查询error";
 		}
-		System.out.println("test");
 		RestResult<Object> restResult = new RestResult<>(code, msg, user);
 		return restResult;
 	}
