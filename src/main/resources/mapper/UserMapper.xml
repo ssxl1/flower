@@ -3,27 +3,23 @@
 <mapper namespace="com.ypf.cn.dao.UserMapper">
 	<resultMap id="BaseResultMap" type="com.ypf.cn.domain.User">
 		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="user_sn" jdbcType="VARCHAR" property="userSn" />
-		<result column="user_name" jdbcType="VARCHAR"
-			property="userName" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
 		<result column="password" jdbcType="VARCHAR"
 			property="password" />
-		<result column="salt" jdbcType="VARCHAR" property="salt" />
-		<result column="first_name" jdbcType="VARCHAR"
-			property="firstName" />
-		<result column="last_name" jdbcType="VARCHAR"
-			property="lastName" />
+		<result column="group_" jdbcType="VARCHAR" property="group" />
+		<result column="deleteAt" jdbcType="TIMESTAMP"
+			property="deleteat" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="age" jdbcType="INTEGER" property="age" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="sex" jdbcType="VARCHAR" property="sex" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
 		<result column="email" jdbcType="VARCHAR" property="email" />
-		<result column="enabled" jdbcType="BIT" property="enabled" />
-		<result column="last_password_reset_date" jdbcType="TIMESTAMP"
-			property="lastPasswordResetDate" />
-		<result column="deleted" jdbcType="BIT" property="deleted" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, user_sn, user_name, password, salt, first_name,
-		last_name, email,
-		enabled, last_password_reset_date,
-		deleted
+		id, name, password, group_, deleteAt, address, age, tel,
+		sex, status,
+		email
 	</sql>
 	<select id="selectByPrimaryKey"
 		parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -38,20 +34,19 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.ypf.cn.domain.User">
-		insert into user (id, user_sn,
-		user_name,
-		password, salt, first_name,
-		last_name, email, enabled,
-		last_password_reset_date, deleted)
-		values (#{id,jdbcType=INTEGER},
-		#{userSn,jdbcType=VARCHAR},
-		#{userName,jdbcType=VARCHAR},
-		#{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR},
-		#{firstName,jdbcType=VARCHAR},
-		#{lastName,jdbcType=VARCHAR},
-		#{email,jdbcType=VARCHAR},
-		#{enabled,jdbcType=BIT},
-		#{lastPasswordResetDate,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
+		insert into user (id, name,
+		password,
+		group_, deleteAt, address,
+		age, tel, sex, status,
+		email)
+		values
+		(#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{group,jdbcType=VARCHAR},
+		#{deleteat,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR},
+		#{age,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
 		parameterType="com.ypf.cn.domain.User">
@@ -60,70 +55,70 @@
 			<if test="id != null">
 				id,
 			</if>
-			<if test="userSn != null">
-				user_sn,
-			</if>
-			<if test="userName != null">
-				user_name,
+			<if test="name != null">
+				name,
 			</if>
 			<if test="password != null">
 				password,
 			</if>
-			<if test="salt != null">
-				salt,
+			<if test="group != null">
+				group_,
 			</if>
-			<if test="firstName != null">
-				first_name,
+			<if test="deleteat != null">
+				deleteAt,
 			</if>
-			<if test="lastName != null">
-				last_name,
+			<if test="address != null">
+				address,
+			</if>
+			<if test="age != null">
+				age,
+			</if>
+			<if test="tel != null">
+				tel,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="status != null">
+				status,
 			</if>
 			<if test="email != null">
 				email,
-			</if>
-			<if test="enabled != null">
-				enabled,
-			</if>
-			<if test="lastPasswordResetDate != null">
-				last_password_reset_date,
-			</if>
-			<if test="deleted != null">
-				deleted,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				#{id,jdbcType=INTEGER},
 			</if>
-			<if test="userSn != null">
-				#{userSn,jdbcType=VARCHAR},
-			</if>
-			<if test="userName != null">
-				#{userName,jdbcType=VARCHAR},
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
 			</if>
 			<if test="password != null">
 				#{password,jdbcType=VARCHAR},
 			</if>
-			<if test="salt != null">
-				#{salt,jdbcType=VARCHAR},
+			<if test="group != null">
+				#{group,jdbcType=VARCHAR},
 			</if>
-			<if test="firstName != null">
-				#{firstName,jdbcType=VARCHAR},
+			<if test="deleteat != null">
+				#{deleteat,jdbcType=TIMESTAMP},
 			</if>
-			<if test="lastName != null">
-				#{lastName,jdbcType=VARCHAR},
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="age != null">
+				#{age,jdbcType=INTEGER},
+			</if>
+			<if test="tel != null">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
 			</if>
 			<if test="email != null">
 				#{email,jdbcType=VARCHAR},
-			</if>
-			<if test="enabled != null">
-				#{enabled,jdbcType=BIT},
-			</if>
-			<if test="lastPasswordResetDate != null">
-				#{lastPasswordResetDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="deleted != null">
-				#{deleted,jdbcType=BIT},
 			</if>
 		</trim>
 	</insert>
@@ -131,36 +126,35 @@
 		parameterType="com.ypf.cn.domain.User">
 		update user
 		<set>
-			<if test="userSn != null">
-				user_sn = #{userSn,jdbcType=VARCHAR},
-			</if>
-			<if test="userName != null">
-				user_name = #{userName,jdbcType=VARCHAR},
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
 			</if>
 			<if test="password != null">
 				password = #{password,jdbcType=VARCHAR},
 			</if>
-			<if test="salt != null">
-				salt = #{salt,jdbcType=VARCHAR},
+			<if test="group != null">
+				group_ = #{group,jdbcType=VARCHAR},
 			</if>
-			<if test="firstName != null">
-				first_name = #{firstName,jdbcType=VARCHAR},
+			<if test="deleteat != null">
+				deleteAt = #{deleteat,jdbcType=TIMESTAMP},
 			</if>
-			<if test="lastName != null">
-				last_name = #{lastName,jdbcType=VARCHAR},
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="age != null">
+				age = #{age,jdbcType=INTEGER},
+			</if>
+			<if test="tel != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
 			</if>
 			<if test="email != null">
 				email = #{email,jdbcType=VARCHAR},
-			</if>
-			<if test="enabled != null">
-				enabled = #{enabled,jdbcType=BIT},
-			</if>
-			<if test="lastPasswordResetDate != null">
-				last_password_reset_date =
-				#{lastPasswordResetDate,jdbcType=TIMESTAMP},
-			</if>
-			<if test="deleted != null">
-				deleted = #{deleted,jdbcType=BIT},
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
@@ -168,22 +162,41 @@
 	<update id="updateByPrimaryKey"
 		parameterType="com.ypf.cn.domain.User">
 		update user
-		set user_sn = #{userSn,jdbcType=VARCHAR},
-		user_name = #{userName,jdbcType=VARCHAR},
-		password =
-		#{password,jdbcType=VARCHAR},
-		salt = #{salt,jdbcType=VARCHAR},
-		first_name = #{firstName,jdbcType=VARCHAR},
-		last_name =
-		#{lastName,jdbcType=VARCHAR},
-		email = #{email,jdbcType=VARCHAR},
-		enabled = #{enabled,jdbcType=BIT},
-		last_password_reset_date =
-		#{lastPasswordResetDate,jdbcType=TIMESTAMP},
-		deleted =
-		#{deleted,jdbcType=BIT}
-		where id = #{id,jdbcType=INTEGER}
+		set name = #{name,jdbcType=VARCHAR},
+		password
+		= #{password,jdbcType=VARCHAR},
+		group_ = #{group,jdbcType=VARCHAR},
+		deleteAt = #{deleteat,jdbcType=TIMESTAMP},
+		address =
+		#{address,jdbcType=VARCHAR},
+		age = #{age,jdbcType=INTEGER},
+		tel =
+		#{tel,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=VARCHAR},
+		status =
+		#{status,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR}
+		where id =
+		#{id,jdbcType=INTEGER}
 	</update>
+	<select id="selectByLogin" resultMap="BaseResultMap"
+		parameterType="com.ypf.cn.domain.User">
+		select
+		<include refid="Base_Column_List" />
+		from user where 1=1
+		<if test="email!=null">
+			and email = #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="name!=null">
+			and name = #{name,jdbcType=VARCHAR}
+		</if>
+		<if test="tel!=null">
+			and tel = #{tel,jdbcType=VARCHAR}
+		</if>
+		<if test="password!=null">
+			and password =#{password,jdbcType=VARCHAR}
+		</if>
+	</select>
 	<select id="selectByMap" resultMap="BaseResultMap"
 		parameterType="java.util.HashMap">
 		select
@@ -193,8 +206,8 @@
 			and id = #{id,jdbcType=INTEGER}
 		</if>
 
-		<if test="userName != null">
-			#{userName,jdbcType=VARCHAR},
+		<if test="roleid!=null">
+			and roleid = #{roleid,jdbcType=INTEGER}
 		</if>
 		<if test="name!=null">
 			and name LIKE CONCAT('%',#{name},'%')
@@ -215,17 +228,14 @@
 		<if test="id!=null">
 			and id = #{id,jdbcType=INTEGER}
 		</if>
-		<if test="userName != null">
-			#{userName,jdbcType=VARCHAR},
+		<if test="roleid!=null">
+			and roleid = #{roleid,jdbcType=INTEGER}
 		</if>
 		<if test="name!=null">
 			and name LIKE CONCAT('%',#{name},'%')
 		</if>
 		<if test="is_admin!=null">
 			and is_admin =#{is_admin,jdbcType=VARCHAR}
-		</if>
-		<if test="userSalary!=null">
-			and userSalary >=#{userSalary,jdbcType=NUMERIC}
 		</if>
 	</select>
 </mapper>

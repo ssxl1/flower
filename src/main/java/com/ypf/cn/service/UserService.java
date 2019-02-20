@@ -117,7 +117,7 @@ public class UserService implements UserMapper {
 		mapjson.put("data", list);
 		String code = "";
 		String msg = "";
-		if (list.size() > 0) {
+		if (list.size() >= 0) {
 			code = "200";
 			msg = "查询成功";
 		} else {
@@ -128,5 +128,11 @@ public class UserService implements UserMapper {
 
 		return result;
 
+	}
+
+	@Override
+	public User selectByLogin(User map) {
+		// TODO Auto-generated method stub
+		return userMapper.selectByLogin(map);
 	}
 }

@@ -1,10 +1,12 @@
 package com.ypf.cn.controller;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +17,7 @@ import com.ypf.cn.util.RestResult;
 
 @RestController
 public class UsersController {
-	// 依赖注入 
+	// 依赖注入
 	@Autowired
 	UserService userService;
 
@@ -57,8 +59,7 @@ public class UsersController {
 	public RestResult updateUser(@PathVariable int id, @RequestBody User user) {
 		user.setId(id);
 		int result = userService.deleteByPrimaryKey(id);
-		
-		
+
 		String code = "";
 		String msg = "";
 		if (result > 0) {
@@ -87,6 +88,12 @@ public class UsersController {
 		}
 		RestResult<Object> restResult = new RestResult<>(code, msg, user);
 		return restResult;
+	}
+
+	@RequestMapping(value = "/rest/User/select", method = RequestMethod.GET)
+	public RestResult<Object> findAllBook(@RequestHeader int page, @RequestHeader int limit,
+			@RequestHeader String jsonString) {
+		return userService.selectAllUser(limit, page, jsonString);
 	}
 
 }

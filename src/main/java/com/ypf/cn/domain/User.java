@@ -5,25 +5,25 @@ import java.util.Date;
 public class User {
     private Integer id;
 
-    private String userSn;
-
-    private String userName;
+    private String name;
 
     private String password;
 
-    private String salt;
+    private String group;
 
-    private String firstName;
+    private Date deleteat;
 
-    private String lastName;
+    private String address;
+
+    private Integer age;
+
+    private String tel;
+
+    private String sex;
+
+    private String status;
 
     private String email;
-
-    private Boolean enabled;
-
-    private Date lastPasswordResetDate;
-
-    private Boolean deleted;
 
     public Integer getId() {
         return id;
@@ -33,20 +33,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserSn() {
-        return userSn;
+    public String getName() {
+        return name;
     }
 
-    public void setUserSn(String userSn) {
-        this.userSn = userSn;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -57,28 +49,60 @@ public class User {
         this.password = password;
     }
 
-    public String getSalt() {
-        return salt;
+    public String getGroup() {
+        return group;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Date getDeleteat() {
+        return deleteat;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setDeleteat(Date deleteat) {
+        this.deleteat = deleteat;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getEmail() {
@@ -87,29 +111,5 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Date getLastPasswordResetDate() {
-        return lastPasswordResetDate;
-    }
-
-    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
-        this.lastPasswordResetDate = lastPasswordResetDate;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
     }
 }
