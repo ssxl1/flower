@@ -20,7 +20,7 @@ public class SmsSendDemo {
 	public static String account = "N6144211";
 
 	// 请登录zz.253.com 获取创蓝API密码(非登录密码)
-	public static String pswd = "N2zUHcCQKs438d";
+	public static String pswd = "N2zUHcCQKs438sd";
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
 
@@ -30,7 +30,7 @@ public class SmsSendDemo {
 		// 设置您要发送的内容：其中“【】”中括号为运营商签名符号，多签名内容前置添加提交
 		String msg = "【253云通讯科技】你好,你的验证码是";
 		// 手机号码
-		String phone = "15526228652";
+		String phone = "";
 		// 状态报告
 		String report = "true";
 		

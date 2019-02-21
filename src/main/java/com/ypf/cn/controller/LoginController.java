@@ -29,10 +29,10 @@ public class LoginController {
 	public static String account = "N6144211";
 	
 	// 请登录zz.253.com 获取创蓝API密码(非登录密码)
-	public static String pswd = "N2zUHcCQKs438d";
+	public static String pswd = "N2zUHcCQKs438sd";
 	// 登录
 	@ResponseBody
-	@RequestMapping(value = "/loginuser")
+	@RequestMapping(value = "/loginusers")
 	public Map register2(@RequestBody User user3, HttpServletRequest request) {
 		Map mapjson = new HashMap();
 

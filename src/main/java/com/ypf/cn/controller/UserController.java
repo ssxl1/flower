@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ypf.cn.domain.Middleteacher;
 import com.ypf.cn.domain.Users;
-import com.ypf.cn.service.TeacherService;
 import com.ypf.cn.service.UserService;
 import com.ypf.cn.service.UsersServlce;
 import com.ypf.cn.util.PageUtil;
@@ -32,9 +31,6 @@ public class UserController {
 
 	@Autowired
 	UsersServlce usersService;
-
-	@Autowired
-	TeacherService teacherService;
 
 	@ResponseBody
 	@RequestMapping(value = "/adduser")
@@ -55,7 +51,7 @@ public class UserController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/loginuser")
+	@RequestMapping(value = "/loginuser1")
 	public Map register2(@RequestBody Users user3, HttpServletRequest request) {
 		Map mapjson = new HashMap();
 
@@ -221,13 +217,10 @@ public class UserController {
 			map.remove("roleid");
 			map.put("cid", cid);
 		}
-		List<Middleteacher> tlist = teacherService.selectByMap(map);
 		mapjson.put("code", 0);
 		mapjson.put("msg", "");
 		mapjson.put("count", list.size());
 		mapjson.put("data", list);
-		mapjson.put("tcount", tlist.size());
-		mapjson.put("tlist", tlist);
 		return mapjson;
 	}
 

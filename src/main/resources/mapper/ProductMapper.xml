@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ypf.cn.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.ypf.cn.domain.Product" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="subTitle" property="subtitle" jdbcType="VARCHAR" />
+    <result column="originalPrice" property="originalprice" jdbcType="DECIMAL" />
+    <result column="nowPrice" property="nowprice" jdbcType="DECIMAL" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="imgid" property="imgid" jdbcType="INTEGER" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="commentCount" property="commentcount" jdbcType="INTEGER" />
+    <result column="saleCount" property="salecount" jdbcType="INTEGER" />
+    <result column="deleteAt" property="deleteat" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cid, name, subTitle, originalPrice, nowPrice, stock, imgid, createDate, commentCount, 
+    saleCount, deleteAt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ypf.cn.domain.Product" >
+    insert into product (id, cid, name, 
+      subTitle, originalPrice, nowPrice, 
+      stock, imgid, createDate, 
+      commentCount, saleCount, deleteAt
+      )
+    values (#{id,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, #{originalprice,jdbcType=DECIMAL}, #{nowprice,jdbcType=DECIMAL}, 
+      #{stock,jdbcType=INTEGER}, #{imgid,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{commentcount,jdbcType=INTEGER}, #{salecount,jdbcType=INTEGER}, #{deleteat,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ypf.cn.domain.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="subtitle != null" >
+        subTitle,
+      </if>
+      <if test="originalprice != null" >
+        originalPrice,
+      </if>
+      <if test="nowprice != null" >
+        nowPrice,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="imgid != null" >
+        imgid,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="commentcount != null" >
+        commentCount,
+      </if>
+      <if test="salecount != null" >
+        saleCount,
+      </if>
+      <if test="deleteat != null" >
+        deleteAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="originalprice != null" >
+        #{originalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="nowprice != null" >
+        #{nowprice,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="imgid != null" >
+        #{imgid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentcount != null" >
+        #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="salecount != null" >
+        #{salecount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteat != null" >
+        #{deleteat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ypf.cn.domain.Product" >
+    update product
+    <set >
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subTitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="originalprice != null" >
+        originalPrice = #{originalprice,jdbcType=DECIMAL},
+      </if>
+      <if test="nowprice != null" >
+        nowPrice = #{nowprice,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="imgid != null" >
+        imgid = #{imgid,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentcount != null" >
+        commentCount = #{commentcount,jdbcType=INTEGER},
+      </if>
+      <if test="salecount != null" >
+        saleCount = #{salecount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteat != null" >
+        deleteAt = #{deleteat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ypf.cn.domain.Product" >
+    update product
+    set cid = #{cid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      subTitle = #{subtitle,jdbcType=VARCHAR},
+      originalPrice = #{originalprice,jdbcType=DECIMAL},
+      nowPrice = #{nowprice,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      imgid = #{imgid,jdbcType=INTEGER},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      commentCount = #{commentcount,jdbcType=INTEGER},
+      saleCount = #{salecount,jdbcType=INTEGER},
+      deleteAt = #{deleteat,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByMap" resultMap="BaseResultMap"
+		parameterType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from product where 1=1
+		<if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+		</if>
+
+		<if test="roleid!=null">
+			and roleid = #{roleid,jdbcType=INTEGER}
+		</if>
+		<if test="name!=null">
+			and name LIKE CONCAT('%',#{name},'%')
+		</if>
+		<if test="is_admin!=null">
+			and is_admin =#{is_admin,jdbcType=VARCHAR}
+		</if>
+		<if test="startPos!=null">
+			limit #{startPos},#{limit}
+		</if>
+
+		<!-- startPos=(page-1)*limit从第几条数据开始查询 pagesize每页显示几条 -->
+	</select>
+
+	<select id="findcountbycondition" resultType="Integer"
+		parameterType="java.util.HashMap">
+		select count(*) from product where 1=1
+		<if test="id!=null">
+			and id = #{id,jdbcType=INTEGER}
+		</if>
+		<if test="roleid!=null">
+			and roleid = #{roleid,jdbcType=INTEGER}
+		</if>
+		<if test="name!=null">
+			and name LIKE CONCAT('%',#{name},'%')
+		</if>
+		<if test="is_admin!=null">
+			and is_admin =#{is_admin,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>
